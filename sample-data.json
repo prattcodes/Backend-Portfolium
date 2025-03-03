@@ -1,0 +1,121 @@
+{
+  "users": [
+    {
+      "_id": { "$oid": "67c4eb8d49c0194d639d770d" },
+      "displayName": "John Developer",
+      "email": "john@example.com",
+      "authProvider": "github",
+      "providerId": "gh123456",
+      "githubUsername": "johndeveloper",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/123456",
+      "lastLogin": "2024-02-08T12:00:00Z",
+      "accessToken": "gho_xxxxxxxxxxxxxxxxxxxx",
+      "createdAt": "2024-01-15T00:00:00Z",
+      "updatedAt": "2024-02-08T12:00:00Z"
+    }
+  ],
+  "portfolios": [
+    {
+      "_id": { "$oid": "67c4eb8d49c0194d639d770e" },
+      "userId": { "$oid": "67c4eb8d49c0194d639d770d" },
+      "personal": {
+        "name": "John Developer",
+        "position": "Full Stack Developer",
+        "bio": "Passionate developer with 5+ years of experience in web technologies",
+        "profilePhotoId": "profile123"
+      },
+      "settings": {
+        "experienceSectionEnabled": true,
+        "blogsSectionEnabled": true,
+        "resumeEnabled": true,
+        "useProviderAvatar": true
+      },
+      "contact": {
+        "email": "john@example.com",
+        "socialLinks": [
+          {
+            "platform": "github",
+            "url": "https://github.com/johndeveloper",
+            "label": "GitHub Profile"
+          },
+          {
+            "platform": "linkedin",
+            "url": "https://linkedin.com/in/johndeveloper",
+            "label": "LinkedIn Profile"
+          }
+        ]
+      },
+      "resume": {
+        "fileId": "resume123",
+        "fileName": "john_developer_resume.pdf"
+      },
+      "subdomain": "john",
+      "customSubdomain": "johndeveloper",
+      "isPublished": true,
+      "publishedAt": "2024-02-01T00:00:00Z"
+    }
+  ],
+  "experiences": [
+    {
+      "_id": { "$oid": "67c4eb8d49c0194d639d770f" },
+      "portfolioId": { "$oid": "67c4eb8d49c0194d639d770e" },
+      "title": "Senior Full Stack Developer",
+      "startDate": "2023-01-01T00:00:00Z",
+      "isCurrentPosition": true,
+      "description": "Leading development of enterprise web applications using React and Node.js",
+      "order": 1
+    },
+    {
+      "_id": { "$oid": "67c4eb8d49c0194d639d7710" },
+      "portfolioId": { "$oid": "67c4eb8d49c0194d639d770e" },
+      "title": "Full Stack Developer",
+      "startDate": "2021-01-01T00:00:00Z",
+      "endDate": "2022-12-31T00:00:00Z",
+      "isCurrentPosition": false,
+      "description": "Developed and maintained multiple web applications",
+      "order": 2
+    }
+  ],
+  "projects": [
+    {
+      "_id": { "$oid": "67c4eb8d49c0194d639d7711" },
+      "portfolioId": { "$oid": "67c4eb8d49c0194d639d770e" },
+      "title": "E-commerce Platform",
+      "description": "Built a full-featured e-commerce platform using MERN stack",
+      "technologies": ["React", "Node.js", "MongoDB", "Express"],
+      "liveUrl": "https://ecommerce-example.com",
+      "repoUrl": "https://github.com/johndeveloper/ecommerce",
+      "imageId": "project123",
+      "order": 1
+    },
+    {
+      "_id": { "$oid": "67c4eb8d49c0194d639d7712" },
+      "portfolioId": { "$oid": "67c4eb8d49c0194d639d770e" },
+      "title": "Task Management App",
+      "description": "Developed a real-time task management application",
+      "technologies": ["Vue.js", "Firebase", "Tailwind CSS"],
+      "liveUrl": "https://tasks-example.com",
+      "repoUrl": "https://github.com/johndeveloper/tasks",
+      "imageId": "project456",
+      "order": 2
+    }
+  ],
+  "blogs": [
+    {
+      "_id": { "$oid": "67c4eb8d49c0194d639d7713" },
+      "portfolioId": { "$oid": "67c4eb8d49c0194d639d770e" },
+      "title": "Understanding React Hooks",
+      "description": "A comprehensive guide to React Hooks and their use cases",
+      "url": "https://blog.example.com/react-hooks",
+      "order": 1
+    },
+    {
+      "_id": { "$oid": "67c4eb8d49c0194d639d7714" },
+      "portfolioId": { "$oid": "67c4eb8d49c0194d639d770e" },
+      "title": "MongoDB Best Practices",
+      "description": "Tips and tricks for optimizing MongoDB performance",
+      "url": "https://blog.example.com/mongodb-tips",
+      "order": 2
+    }
+  ]
+}

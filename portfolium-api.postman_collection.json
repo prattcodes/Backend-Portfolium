@@ -1,0 +1,1162 @@
+{
+  "info": {
+    "name": "Portfolium API",
+    "description": "Collection for testing Portfolium API endpoints",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "GitHub OAuth",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/auth/github",
+            "description": "Initiate GitHub OAuth flow"
+          },
+          "response": [
+            {
+              "name": "Successful Redirect",
+              "originalRequest": {
+                "method": "GET",
+                "url": "{{baseUrl}}/api/auth/github"
+              },
+              "status": "302 Found",
+              "header": [
+                {
+                  "key": "Location",
+                  "value": "https://github.com/login/oauth/authorize?client_id=your_client_id&redirect_uri=your_callback_url&scope=user:email"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Google OAuth",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/auth/google",
+            "description": "Initiate Google OAuth flow"
+          },
+          "response": [
+            {
+              "name": "Successful Redirect",
+              "originalRequest": {
+                "method": "GET",
+                "url": "{{baseUrl}}/api/auth/google"
+              },
+              "status": "302 Found",
+              "header": [
+                {
+                  "key": "Location",
+                  "value": "https://accounts.google.com/o/oauth2/v2/auth?client_id=your_client_id&redirect_uri=your_callback_url&scope=profile%20email&response_type=code"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/auth/logout",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "description": "Logout user"
+          },
+          "response": [
+            {
+              "name": "Successful Logout",
+              "originalRequest": {
+                "method": "POST",
+                "url": "{{baseUrl}}/api/auth/logout",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ]
+              },
+              "status": "OK",
+              "code": 200,
+              "body": {
+                "success": true,
+                "message": "Successfully logged out"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Update Account",
+          "request": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/auth/me",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"Updated Name\",\n    \"email\": \"updated@example.com\"\n}"
+            },
+            "description": "Update account settings"
+          },
+          "response": [
+            {
+              "name": "Successful Update",
+              "originalRequest": {
+                "method": "PUT",
+                "url": "{{baseUrl}}/api/auth/me",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"name\": \"Updated Name\",\n    \"email\": \"updated@example.com\"\n}"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "body": {
+                "success": true,
+                "data": {
+                  "_id": "67c4eb8d49c0194d639d770d",
+                  "name": "Updated Name",
+                  "email": "updated@example.com",
+                  "avatarUrl": "https://example.com/avatar.jpg",
+                  "authProvider": "google",
+                  "providerId": "123456789"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Delete Account",
+          "request": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/auth/me",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "description": "Delete account"
+          },
+          "response": [
+            {
+              "name": "Successful Deletion",
+              "originalRequest": {
+                "method": "DELETE",
+                "url": "{{baseUrl}}/api/auth/me",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ]
+              },
+              "status": "OK",
+              "code": 200,
+              "body": {
+                "success": true,
+                "message": "Account successfully deleted"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Portfolio",
+      "item": [
+        {
+          "name": "Get Portfolio",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/portfolio",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "description": "Get user's portfolio data"
+          },
+          "response": [
+            {
+              "name": "Successful Response",
+              "originalRequest": {
+                "method": "GET",
+                "url": "{{baseUrl}}/api/portfolio",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ]
+              },
+              "status": "OK",
+              "code": 200,
+              "body": {
+                "success": true,
+                "data": {
+                  "_id": "67c4eb8d49c0194d639d770e",
+                  "userId": "67c4eb8d49c0194d639d770d",
+                  "personal": {
+                    "name": "John Developer",
+                    "position": "Full Stack Developer",
+                    "bio": "Passionate developer with 5+ years of experience",
+                    "profilePhotoId": "profile-123"
+                  },
+                  "contact": {
+                    "email": "john@example.com",
+                    "socialLinks": [
+                      {
+                        "platform": "github",
+                        "url": "https://github.com/johndeveloper",
+                        "label": "GitHub Profile"
+                      },
+                      {
+                        "platform": "linkedin",
+                        "url": "https://linkedin.com/in/johndeveloper",
+                        "label": "LinkedIn Profile"
+                      }
+                    ]
+                  },
+                  "settings": {
+                    "experienceSectionEnabled": true,
+                    "blogsSectionEnabled": true,
+                    "resumeEnabled": true,
+                    "useProviderAvatar": false
+                  },
+                  "customSubdomain": "johndeveloper",
+                  "isPublished": true,
+                  "publishedAt": "2023-05-15T10:30:00.000Z"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Update Entire Portfolio",
+          "request": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/portfolio",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"personal\": {\n        \"name\": \"John Developer\",\n        \"position\": \"Full Stack Developer\",\n        \"bio\": \"Passionate developer with 5+ years of experience\"\n    },\n    \"contact\": {\n        \"email\": \"john@example.com\",\n        \"socialLinks\": [\n            {\n                \"platform\": \"github\",\n                \"url\": \"https://github.com/johndeveloper\",\n                \"label\": \"GitHub Profile\"\n            }\n        ]\n    }\n}"
+            },
+            "description": "Update entire portfolio"
+          }
+        },
+        {
+          "name": "Update Portfolio Sections",
+          "request": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/portfolio",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"personal.bio\": \"Updated bio content\",\n    \"contact.email\": \"updated@example.com\"\n}"
+            },
+            "description": "Update specific portfolio sections"
+          }
+        },
+        {
+          "name": "Update Portfolio Settings",
+          "request": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/portfolio/settings",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"experienceSectionEnabled\": true,\n    \"blogsSectionEnabled\": true,\n    \"resumeEnabled\": true,\n    \"useProviderAvatar\": false\n}"
+            },
+            "description": "Update portfolio settings"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Experience",
+      "item": [
+        {
+          "name": "Get Experiences",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/portfolio/experience",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "description": "Get all experiences"
+          },
+          "response": [
+            {
+              "name": "Successful Response",
+              "originalRequest": {
+                "method": "GET",
+                "url": "{{baseUrl}}/api/portfolio/experience",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ]
+              },
+              "status": "OK",
+              "code": 200,
+              "body": {
+                "success": true,
+                "data": [
+                  {
+                    "_id": "67c4eb8d49c0194d639d770f",
+                    "portfolioId": "67c4eb8d49c0194d639d770e",
+                    "title": "Senior Developer",
+                    "company": "Tech Solutions Inc.",
+                    "location": "San Francisco, CA",
+                    "startDate": "2022-01-01T00:00:00.000Z",
+                    "endDate": null,
+                    "isCurrentPosition": true,
+                    "description": "Leading development of enterprise applications",
+                    "order": 1
+                  },
+                  {
+                    "_id": "67c4eb8d49c0194d639d7710",
+                    "portfolioId": "67c4eb8d49c0194d639d770e",
+                    "title": "Full Stack Developer",
+                    "company": "Web Innovations",
+                    "location": "Remote",
+                    "startDate": "2020-03-15T00:00:00.000Z",
+                    "endDate": "2021-12-31T00:00:00.000Z",
+                    "isCurrentPosition": false,
+                    "description": "Developed and maintained web applications using React and Node.js",
+                    "order": 2
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Add Experience",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/portfolio/experience",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"title\": \"Senior Developer\",\n    \"startDate\": \"2022-01-01T00:00:00.000Z\",\n    \"isCurrentPosition\": true,\n    \"description\": \"Leading development of enterprise applications\",\n    \"order\": 1\n}"
+            },
+            "description": "Add new experience"
+          }
+        },
+        {
+          "name": "Update Experience",
+          "request": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/portfolio/experience/{{experienceId}}",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"title\": \"Updated Title\",\n    \"description\": \"Updated description\",\n    \"order\": 2\n}"
+            },
+            "description": "Update experience"
+          }
+        },
+        {
+          "name": "Delete Experience",
+          "request": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/portfolio/experience/{{experienceId}}",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "description": "Delete experience"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Projects",
+      "item": [
+        {
+          "name": "Get Projects",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/portfolio/projects",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "description": "Get all projects"
+          },
+          "response": [
+            {
+              "name": "Successful Response",
+              "originalRequest": {
+                "method": "GET",
+                "url": "{{baseUrl}}/api/portfolio/projects",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ]
+              },
+              "status": "OK",
+              "code": 200,
+              "body": {
+                "success": true,
+                "data": [
+                  {
+                    "_id": "67c4eb8d49c0194d639d7711",
+                    "portfolioId": "67c4eb8d49c0194d639d770e",
+                    "title": "E-commerce Platform",
+                    "description": "Built a full-featured e-commerce platform",
+                    "technologies": ["React", "Node.js", "MongoDB"],
+                    "liveUrl": "https://example.com",
+                    "repoUrl": "https://github.com/example/repo",
+                    "imageIds": ["img-123", "img-124"],
+                    "order": 1
+                  },
+                  {
+                    "_id": "67c4eb8d49c0194d639d7712",
+                    "portfolioId": "67c4eb8d49c0194d639d770e",
+                    "title": "Task Management App",
+                    "description": "Developed a task management application with real-time updates",
+                    "technologies": ["Vue.js", "Express", "Socket.io", "PostgreSQL"],
+                    "liveUrl": "https://tasks.example.com",
+                    "repoUrl": "https://github.com/example/tasks",
+                    "imageIds": ["img-125"],
+                    "order": 2
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Add Project",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/portfolio/projects",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"title\": \"E-commerce Platform\",\n    \"description\": \"Built a full-featured e-commerce platform\",\n    \"technologies\": [\"React\", \"Node.js\", \"MongoDB\"],\n    \"liveUrl\": \"https://example.com\",\n    \"repoUrl\": \"https://github.com/example/repo\",\n    \"order\": 1\n}"
+            },
+            "description": "Add new project"
+          }
+        },
+        {
+          "name": "Update Project",
+          "request": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/portfolio/projects/{{projectId}}",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"title\": \"Updated Project Title\",\n    \"description\": \"Updated project description\",\n    \"technologies\": [\"React\", \"Node.js\", \"MongoDB\", \"Express\"],\n    \"order\": 2\n}"
+            },
+            "description": "Update project"
+          }
+        },
+        {
+          "name": "Delete Project",
+          "request": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/portfolio/projects/{{projectId}}",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "description": "Delete project"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Blogs",
+      "item": [
+        {
+          "name": "Get Blogs",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/portfolio/blogs",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "description": "Get all blogs"
+          },
+          "response": [
+            {
+              "name": "Successful Response",
+              "originalRequest": {
+                "method": "GET",
+                "url": "{{baseUrl}}/api/portfolio/blogs",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ]
+              },
+              "status": "OK",
+              "code": 200,
+              "body": {
+                "success": true,
+                "data": [
+                  {
+                    "_id": "67c4eb8d49c0194d639d7713",
+                    "portfolioId": "67c4eb8d49c0194d639d770e",
+                    "title": "Understanding React Hooks",
+                    "description": "A comprehensive guide to React Hooks and their use cases",
+                    "url": "https://blog.example.com/react-hooks",
+                    "order": 1
+                  },
+                  {
+                    "_id": "67c4eb8d49c0194d639d7714",
+                    "portfolioId": "67c4eb8d49c0194d639d770e",
+                    "title": "MongoDB Best Practices",
+                    "description": "Tips and tricks for optimizing MongoDB performance",
+                    "url": "https://blog.example.com/mongodb-tips",
+                    "order": 2
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Add Blog",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/portfolio/blogs",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"title\": \"Understanding React Hooks\",\n    \"description\": \"A comprehensive guide to React Hooks\",\n    \"url\": \"https://blog.example.com/react-hooks\",\n    \"order\": 1\n}"
+            },
+            "description": "Add new blog"
+          }
+        },
+        {
+          "name": "Update Blog",
+          "request": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/portfolio/blogs/{{blogId}}",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"title\": \"Updated Blog Title\",\n    \"description\": \"Updated blog description\",\n    \"url\": \"https://blog.example.com/updated-post\",\n    \"order\": 2\n}"
+            },
+            "description": "Update blog"
+          }
+        },
+        {
+          "name": "Delete Blog",
+          "request": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/portfolio/blogs/{{blogId}}",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "description": "Delete blog"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Media",
+      "item": [
+        {
+          "name": "Upload Profile Photo",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/media/profile-photo",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "photo",
+                  "type": "file",
+                  "src": ""
+                }
+              ]
+            },
+            "description": "Upload profile photo",
+            "response": [
+              {
+                "name": "Successful Upload",
+                "originalRequest": {
+                  "method": "POST",
+                  "url": "{{baseUrl}}/api/media/profile-photo",
+                  "header": [
+                    {
+                      "key": "Authorization",
+                      "value": "Bearer {{token}}",
+                      "type": "text"
+                    }
+                  ],
+                  "body": {
+                    "mode": "formdata",
+                    "formdata": [
+                      {
+                        "key": "photo",
+                        "type": "file",
+                        "src": "/path/to/photo.jpg"
+                      }
+                    ]
+                  }
+                },
+                "status": "OK",
+                "code": 200,
+                "body": {
+                  "success": true,
+                  "data": {
+                    "imageId": "profile-123",
+                    "url": "https://imagedelivery.net/your-account/profile-123/public"
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "name": "Delete Profile Photo",
+          "request": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/media/profile-photo/{{imageId}}",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "description": "Delete profile photo"
+          }
+        },
+        {
+          "name": "Upload Project Image",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/media/project/{{projectId}}",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "image",
+                  "type": "file",
+                  "src": ""
+                }
+              ]
+            },
+            "description": "Upload project image"
+          }
+        },
+        {
+          "name": "Delete Project Image",
+          "request": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/media/project/{{projectId}}/{{imageId}}",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "description": "Delete project image"
+          }
+        },
+        {
+          "name": "Upload Resume",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/media/resume",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "resume",
+                  "type": "file",
+                  "src": ""
+                }
+              ]
+            },
+            "description": "Upload resume"
+          }
+        },
+        {
+          "name": "Get Resume URL",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/media/resume/{{resumeKey}}",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "description": "Get resume download URL"
+          }
+        },
+        {
+          "name": "Delete Resume",
+          "request": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/media/resume/{{resumeKey}}",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "description": "Delete resume"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Publishing",
+      "item": [
+        {
+          "name": "Get Publishing Status",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/publish/status",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "description": "Get publishing status"
+          },
+          "response": [
+            {
+              "name": "Successful Response",
+              "originalRequest": {
+                "method": "GET",
+                "url": "{{baseUrl}}/api/publish/status",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ]
+              },
+              "status": "OK",
+              "code": 200,
+              "body": {
+                "success": true,
+                "data": {
+                  "isPublished": true,
+                  "publishedAt": "2023-05-15T10:30:00.000Z",
+                  "customSubdomain": "johndeveloper",
+                  "publicUrl": "https://johndeveloper.portfolium.dev"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Update Custom Subdomain",
+          "request": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/publish/subdomain",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"customSubdomain\": \"johndeveloper\"\n}"
+            },
+            "description": "Update custom subdomain"
+          }
+        },
+        {
+          "name": "Publish Portfolio",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/publish",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "description": "Publish portfolio"
+          }
+        },
+        {
+          "name": "Unpublish Portfolio",
+          "request": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/publish",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "description": "Unpublish portfolio"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Public",
+      "item": [
+        {
+          "name": "Get Published Portfolio",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/public/{{subdomain}}",
+            "description": "Get published portfolio by subdomain"
+          },
+          "response": [
+            {
+              "name": "Successful Response",
+              "originalRequest": {
+                "method": "GET",
+                "url": "{{baseUrl}}/api/public/johndeveloper"
+              },
+              "status": "OK",
+              "code": 200,
+              "body": {
+                "success": true,
+                "data": {
+                  "personal": {
+                    "name": "John Developer",
+                    "position": "Full Stack Developer",
+                    "bio": "Passionate developer with 5+ years of experience",
+                    "profilePhotoUrl": "https://imagedelivery.net/your-account/profile-123/public"
+                  },
+                  "contact": {
+                    "email": "john@example.com",
+                    "socialLinks": [
+                      {
+                        "platform": "github",
+                        "url": "https://github.com/johndeveloper",
+                        "label": "GitHub Profile"
+                      },
+                      {
+                        "platform": "linkedin",
+                        "url": "https://linkedin.com/in/johndeveloper",
+                        "label": "LinkedIn Profile"
+                      }
+                    ]
+                  },
+                  "experiences": [
+                    {
+                      "title": "Senior Developer",
+                      "company": "Tech Solutions Inc.",
+                      "location": "San Francisco, CA",
+                      "startDate": "2022-01-01T00:00:00.000Z",
+                      "endDate": null,
+                      "isCurrentPosition": true,
+                      "description": "Leading development of enterprise applications"
+                    },
+                    {
+                      "title": "Full Stack Developer",
+                      "company": "Web Innovations",
+                      "location": "Remote",
+                      "startDate": "2020-03-15T00:00:00.000Z",
+                      "endDate": "2021-12-31T00:00:00.000Z",
+                      "isCurrentPosition": false,
+                      "description": "Developed and maintained web applications using React and Node.js"
+                    }
+                  ],
+                  "projects": [
+                    {
+                      "title": "E-commerce Platform",
+                      "description": "Built a full-featured e-commerce platform",
+                      "technologies": ["React", "Node.js", "MongoDB"],
+                      "liveUrl": "https://example.com",
+                      "repoUrl": "https://github.com/example/repo",
+                      "imageUrls": [
+                        "https://imagedelivery.net/your-account/img-123/public",
+                        "https://imagedelivery.net/your-account/img-124/public"
+                      ]
+                    },
+                    {
+                      "title": "Task Management App",
+                      "description": "Developed a task management application with real-time updates",
+                      "technologies": ["Vue.js", "Express", "Socket.io", "PostgreSQL"],
+                      "liveUrl": "https://tasks.example.com",
+                      "repoUrl": "https://github.com/example/tasks",
+                      "imageUrls": [
+                        "https://imagedelivery.net/your-account/img-125/public"
+                      ]
+                    }
+                  ],
+                  "blogs": [
+                    {
+                      "title": "Understanding React Hooks",
+                      "description": "A comprehensive guide to React Hooks and their use cases",
+                      "url": "https://blog.example.com/react-hooks"
+                    },
+                    {
+                      "title": "MongoDB Best Practices",
+                      "description": "Tips and tricks for optimizing MongoDB performance",
+                      "url": "https://blog.example.com/mongodb-tips"
+                    }
+                  ],
+                  "resumeUrl": "https://example.com/resume/johndeveloper"
+                }
+              }
+            },
+            {
+              "name": "Portfolio Not Found",
+              "originalRequest": {
+                "method": "GET",
+                "url": "{{baseUrl}}/api/public/nonexistent"
+              },
+              "status": "Not Found",
+              "code": 404,
+              "body": {
+                "success": false,
+                "error": "Portfolio not found or not published"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:5000",
+      "type": "string"
+    },
+    {
+      "key": "token",
+      "value": "your_jwt_token_here",
+      "type": "string"
+    },
+    {
+      "key": "experienceId",
+      "value": "experience_id_here",
+      "type": "string"
+    },
+    {
+      "key": "projectId",
+      "value": "project_id_here",
+      "type": "string"
+    },
+    {
+      "key": "blogId",
+      "value": "blog_id_here",
+      "type": "string"
+    },
+    {
+      "key": "imageId",
+      "value": "image_id_here",
+      "type": "string"
+    },
+    {
+      "key": "resumeKey",
+      "value": "resume_key_here",
+      "type": "string"
+    },
+    {
+      "key": "subdomain",
+      "value": "subdomain_here",
+      "type": "string"
+    }
+  ]
+} 
