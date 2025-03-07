@@ -23,7 +23,7 @@ A robust backend API for Portfolium - a developer portfolio platform that allows
 
 ### Directory Structure
 
-```
+```bash
 ├── config/           # Configuration files
 │   ├── cloudflare.js # Cloudflare integration
 │   ├── db.js        # MongoDB connection
@@ -49,12 +49,14 @@ A robust backend API for Portfolium - a developer portfolio platform that allows
 ## Setup and Installation
 
 1. Clone the repository:
+
    ```bash
    git clone https://github.com/yourusername/portfolium-backend.git
    cd portfolium-backend
    ```
 
 2. Install dependencies:
+
    ```bash
    npm install
    ```
@@ -102,12 +104,13 @@ A robust backend API for Portfolium - a developer portfolio platform that allows
    - Configure Cloudflare R2 and Images for media storage
 
 5. Start the development server:
+
    ```bash
    npm run dev
    ```
 
 6. Verify the installation:
-   - The server should start on http://localhost:5000
+   - The server should start on <http://localhost:5000>
    - Check the console for successful database connection
    - Test OAuth flows and media upload functionality
 
@@ -198,30 +201,35 @@ The API uses a centralized error handling middleware that returns consistent err
 ## Security
 
 ### Authentication & Authorization
+
 - JWT-based authentication with configurable expiration
 - Protected routes with middleware authentication
 - Role-based access control for admin functions
 - Secure session management with express-session
 
 ### Data Security
+
 - CORS enabled with configurable origins
 - Request validation using express-validator
 - Secure password hashing with bcrypt
 - MongoDB injection prevention
 
 ### File Upload Security
+
 - Secure file uploads with size and type validation
 - Cloudflare R2 for secure media storage
 - Signed URLs for temporary file access
 - File scanning for malware (optional)
 
 ### API Security
+
 - Rate limiting for API endpoints
 - Request sanitization
 - XSS protection
 - CSRF protection
 
 ### Configuration Security
+
 - Environment variable validation
 - Secure secrets management
 - Production security best practices
@@ -230,6 +238,7 @@ The API uses a centralized error handling middleware that returns consistent err
 ## Production Deployment
 
 ### Prerequisites
+
 1. Set up MongoDB Atlas cluster:
    - Create a new cluster in your preferred region
    - Configure network access and database user
@@ -247,7 +256,9 @@ The API uses a centralized error handling middleware that returns consistent err
    - Update callback URLs for production environment
 
 ### Deployment Steps
+
 1. Prepare for production:
+
    ```bash
    # Install dependencies
    npm install --production
@@ -275,12 +286,14 @@ The API uses a centralized error handling middleware that returns consistent err
    - Configure backup strategy
 
 ### Monitoring and Maintenance
+
 - Set up application monitoring (e.g., New Relic, DataDog)
 - Configure error tracking (e.g., Sentry)
 - Set up automated backups for MongoDB
 - Implement logging and analytics
 
 ### Troubleshooting
+
 - Check application logs for errors
 - Verify environment variables
 - Ensure database connectivity
